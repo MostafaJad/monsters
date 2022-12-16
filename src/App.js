@@ -1,6 +1,7 @@
 import { Component } from "react";
 import CardList from "./components/card-list/card-list.component.jsx";
 import "./App.css";
+import SearcBox from "./components/search-box/search-box-component.jsx";
 
 class App extends Component {
   constructor() {
@@ -10,7 +11,6 @@ class App extends Component {
       searchField: "",
     };
   }
-
   componentDidMount() {
     fetch("https://jsonplaceholder.typicode.com/users")
       .then((response) => response.json())
@@ -20,10 +20,8 @@ class App extends Component {
         })
       );
   }
-
   onSearchChange = (event) => {
     const searchField = event.target.value.toLocaleLowerCase();
-
     this.setState(() => {
       return { searchField };
     });
@@ -36,11 +34,11 @@ class App extends Component {
     });
     return (
       <div className="App">
-        <input
+        <h1 className="app-title">Monsters Rolodex</h1>
+        <SearcBox
+          onSearchChange={onSearchChange}
+          placeholder="search monsters"
           className="search-box"
-          type="search"
-          placeholder="Search Monster"
-          onChange={onSearchChange}
         />
         <CardList monsters={fileredMonsters} />
       </div>
